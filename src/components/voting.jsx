@@ -2,21 +2,26 @@ import React from 'react';
 import Vote from './vote';
 import Winner from './winner';
 
-export default React.createClass({
-    getPair: function() {
+export default class Voting extends React.PureComponent {
+    getPair() {
         return this.props.pair || [];
-    },
-    isDisabled: function() {
+    }
+
+    isDisabled() {
         return !!this.props.hasVoted;
-    },
-    hasVotedFor: function(entry) {
+    }
+
+    hasVotedFor() {
         return this.props.hasVoted === entry;
-    },
-    render: function() {
+    }
+
+    render() {
         return (
             <div className="voting">
-                {this.props.winner ? <Winner ref="winner" winner={this.props.winner} /> : <Vote {...this.props} />}
+                {this.props.winner ?
+                    <Winner ref="winner" winner={this.props.winner} /> :
+                    <Vote {...this.props} />}
             </div>
         );
     }
-});
+}
