@@ -1,4 +1,6 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
 import Vote from './vote';
 import Winner from './winner';
 
@@ -25,3 +27,12 @@ export default class Voting extends React.PureComponent {
         );
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        pair: state.getIn(['vote', 'pair']),
+        winner: state.get('winner')
+    };
+}
+
+connect(mapStateToProps)(Voting);

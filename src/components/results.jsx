@@ -1,4 +1,5 @@
 import React from 'react';
+import Winner from './winner';
 
 export default class Results extends React.PureComponent {
     getPair() {
@@ -13,15 +14,24 @@ export default class Results extends React.PureComponent {
     }
 
     render() {
-        return (
+        return this.props.winner ?
+            <Winner ref="winner" winner={this.props.winner} /> :
             <div className="results">
-                {this.getPair().map(entry =>
-                    <div key={entry} className="entry">
-                        <h1>{entry}</h1>
-                        <div className="vote-count">{this.getVotes(entry)}</div>
-                    </div>
-                )}
+                <div className="tally">
+                    {this.getPair().map(entry =>
+                            <div key={entry} className="entry">
+                                <h1>{entry}</h1>
+                                <div className="vote-count">{this.getVotes(entry)}</div>
+                            </div>
+                    )}
+                </div>
+                <div className="management">
+                    <button ref="next"
+                            className="next"
+                            onClick={this.props.next}>
+                        Next
+                    </button>
+                </div>
             </div>
-        );
     }
 }
